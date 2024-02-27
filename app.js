@@ -48,6 +48,7 @@ app.use(function(err, req, res, next) {
 const getDatabaseConfig = require('./config/db');
 (async() => {
   const config = await getDatabaseConfig();
+  console.log(config);
   // db 연결 로직 수행
 })();
 /////////////////////////////////////////////////////////////////////////
