@@ -1,5 +1,8 @@
 // 환경변수 설정
-require('dotenv').config();
+var dotenv = require('dotenv');
+dotenv.config({
+  path: `.env${(process.env.NODE_ENV?'.'+process.env.NODE_ENV:'')}` // NODE_ENV에 따라 적절한 환경 파일을 로드합니다.
+});
 
 var createError = require('http-errors');
 var express = require('express');
@@ -40,5 +43,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+/////////////////////////////////////////////////////////////////////////
+const getDatabaseConfig = require('./config/db');
+(async() => {
+  const config = await getDatabaseConfig();
+  // db 연결 로직 수행
+})();
+/////////////////////////////////////////////////////////////////////////
 
 module.exports = app;
